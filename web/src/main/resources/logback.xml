@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration scan="true" scanPeriod="3000 seconds" debug="false">
+    <!--应用名 -->
+    <property name="APP_Name" value="springboot_study"/>
+    <!--日志文件的保存路径-->
+    <property name="LOG_HOME" value="F:/logs"/>
+    <!--日志输出级别-->
+    <property name="LOG_LEVEL" value="INFO"/>
+    <!-- 日志输出格式 -->
+    <property name="ENCODER_PATTERN"
+              value="%d{yyyy-MM-dd  HH:mm:ss.SSS} [%thread] %-5level %logger{32} - %msg%n"/>
+
+    <contextName>${APP_Name}</contextName>
+
+    <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener"/>
+
+    <appender name="STDOUT"
+              class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${ENCODER_PATTERN}</pattern>
+        </layout>
+    </appender>
+
+    <appender name="INFO-FILE"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>
+                ${LOG_HOME}/study_info.%d{yyyy-MM-dd}.log
+            </FileNamePattern>
+            <MaxHistory>180</MaxHistory>
+        </rollingPolicy>
+
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${ENCODER_PATTERN}</pattern>
+        </layout>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <appender name="WARN-FILE"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>
+                ${LOG_HOME}/study_warn.%d{yyyy-MM-dd}.log
+            </FileNamePattern>
+            <MaxHistory>180</MaxHistory>
+        </rollingPolicy>
+
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${ENCODER_PATTERN}</pattern>
+        </layout>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <appender name="ERROR-FILE"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>
+                ${LOG_HOME}/study_error.%d{yyyy-MM-dd}.log
+            </FileNamePattern>
+            <MaxHistory>180</MaxHistory>
+        </rollingPolicy>
+
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${ENCODER_PATTERN}</pattern>
+        </layout>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!--
+       logger元素用来设置某包或者类的日志输出级别
+       name:表示某包或类名称
+       level:表示日志级别，如果没有此属性，那么当前的logger会继承上级的日志级别
+    -->
+    <logger name="net.sf.json.JSONObject" level="ERROR">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="ERROR-FILE"/>
+    </logger>
+    <logger name="net.sf.ezmorph.bean.BeanMorpher" level="ERROR">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="ERROR-FILE"/>
+    </logger>
+
+    <root>
+        <level value="${LOG_LEVEL}"/>
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="INFO-FILE"/>
+        <appender-ref ref="WARN-FILE"/>
+        <appender-ref ref="ERROR-FILE"/>
+    </root>
+</configuration>
