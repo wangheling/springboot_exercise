@@ -8,9 +8,9 @@ import java.util.concurrent.*;
  * @Auther: wangheling
  * @Date: 2019/7/3 11:37
  * @Description: 使用wait、notify实现生产者消费者demo
- *                 tips:1.自定义线程工厂
- *                      2.拒绝策略：丢弃策略测试
- *                      3.自定义拒绝策略（不丢弃任务）：测试
+ * tips:1.自定义线程工厂
+ * 2.拒绝策略：丢弃策略测试
+ * 3.自定义拒绝策略（不丢弃任务）：测试
  */
 @Slf4j
 public class Test01 {
@@ -50,13 +50,13 @@ public class Test01 {
                 });
         int count = 0;
         while (count < 1000) {
-            threadPoolExecutor.submit(new Producer(queue, MAX_SIZE));
 //            try {
 //                //使用默认拒绝策略，防止消费者来不及消费而拒绝任务，放慢生产者生产速度
 //                TimeUnit.MICROSECONDS.sleep(5L);
 //            } catch (InterruptedException e) {
 //                e.printStackTrace();
 //            }
+            threadPoolExecutor.submit(new Producer(queue, MAX_SIZE));
             threadPoolExecutor.submit(new Consumer(queue, MAX_SIZE));
             count++;
         }
@@ -90,12 +90,6 @@ public class Test01 {
                         e.printStackTrace();
                     }
                 }
-//                try {
-//                    //控制生产者速度，防止消费者来不及消费，拒绝策略丢弃任务
-//                    TimeUnit.MICROSECONDS.sleep(500L);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
                 log.info("生产者开始生产");
                 queue.add(String.valueOf(System.currentTimeMillis()));
                 //通知消费者消费
