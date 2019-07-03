@@ -8,13 +8,16 @@ import java.util.concurrent.*;
  * @Auther: wangheling
  * @Date: 2019/7/3 11:37
  * @Description: 使用wait、notify实现生产者消费者demo
+ *                 tips:1.自定义线程工厂
+ *                      2.拒绝策略：丢弃策略测试
+ *                      3.自定义拒绝策略（不丢弃任务）：测试
  */
 @Slf4j
 public class Test01 {
 
     public static void main(String[] args) {
 
-        int MAX_SIZE = 100;
+        final int MAX_SIZE = 100;
 
         //阻塞队列
         BlockingQueue<String> queue = new ArrayBlockingQueue<>(MAX_SIZE);
@@ -30,26 +33,34 @@ public class Test01 {
                 new ThreadFactory() {
                     @Override
                     public Thread newThread(Runnable r) {
-                        return new Thread(r,"my-thread" + r);
+                        return new Thread(r, "测试线程");
+                    }
+                },
+                //自定义拒绝策略，保证所有任务都要完成，不丢弃
+                new RejectedExecutionHandler() {
+                    @Override
+                    public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
+                        try {
+                            //核心改造点，由blockingqueue的offer改成put阻塞方法
+                            executor.getQueue().put(r);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
         int count = 0;
-        while (count < 100) {
+        while (count < 1000) {
             threadPoolExecutor.submit(new Producer(queue, MAX_SIZE));
-            try {
-                TimeUnit.MICROSECONDS.sleep(5L);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                //使用默认拒绝策略，防止消费者来不及消费而拒绝任务，放慢生产者生产速度
+//                TimeUnit.MICROSECONDS.sleep(5L);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
             threadPoolExecutor.submit(new Consumer(queue, MAX_SIZE));
             count++;
         }
         threadPoolExecutor.shutdown();
-
-//        while (true) {
-//            new Thread(new Producer(queue, MAX_SIZE)).start();
-//            new Thread(new Consumer(queue, MAX_SIZE)).start();
-//        }
     }
 
     /**
@@ -80,6 +91,7 @@ public class Test01 {
                     }
                 }
 //                try {
+//                    //控制生产者速度，防止消费者来不及消费，拒绝策略丢弃任务
 //                    TimeUnit.MICROSECONDS.sleep(500L);
 //                } catch (InterruptedException e) {
 //                    e.printStackTrace();
