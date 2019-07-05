@@ -15,12 +15,13 @@ public class DaemonTest {
         AtomicInteger count = new AtomicInteger(1);
 
         for (int i = 0; i < 10; i++) {
-            Thread thread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    System.out.println(count.getAndIncrement() + "子线程运行");
-                }
-            });
+//            Thread thread = new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    System.out.println(count.getAndIncrement() + "子线程运行");
+//                }
+//            });
+            Thread thread = new Thread(() -> System.out.println(count.getAndIncrement() + "子线程运行"));
             //默认非守护线程
             /**
              * 主线程结束，子线程不会结束，会全部执行完
