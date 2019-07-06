@@ -23,6 +23,7 @@
         <module>service</module>
         <module>dao</module>
         <module>model</module>
+        <module>common</module>
     </modules>
 
     <dependencies>
