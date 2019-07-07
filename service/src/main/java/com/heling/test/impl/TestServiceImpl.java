@@ -22,8 +22,8 @@ public class TestServiceImpl implements TestService {
     private TestMapper testMapper;
 
     @Override
-    public String test() {
-        Test test = testMapper.selectByPrimaryKey(1);
+    public String test(Integer id) {
+        Test test = testMapper.selectByPrimaryKey(id);
         log.info("响应结果为:{}",JSONObject.toJSON(test));
         return JSONObject.toJSONString(test);
     }

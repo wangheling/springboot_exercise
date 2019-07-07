@@ -7,5 +7,5 @@ package com.heling.test;
  */
 public interface TestService {
 
-    String test();
+    String test(Integer id);
 }

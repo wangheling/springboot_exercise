@@ -1,11 +1,10 @@
 package com.heling.controller;
 
 import com.heling.test.TestService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * @author whl
@@ -19,8 +18,8 @@ public class TestController {
     @Resource
     private TestService testService;
 
-    @GetMapping("test")
-    public String test() {
-        return testService.test();
+    @PostMapping("test")
+    public String test(@RequestBody Map<String, Object> map) {
+        return testService.test(((Integer) map.get("id")));
     }
 }

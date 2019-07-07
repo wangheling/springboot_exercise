@@ -1,4 +1,4 @@
-package com.heling.common;
+package com.heling.utils;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
