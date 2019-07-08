@@ -1,6 +1,6 @@
 //package com.heling.config;
 //
-//import com.heling.interceptor.SecurityInterceptor;
+//import com.heling.interceptor.ValidateSignInterceptor;
 //import org.springframework.context.annotation.Bean;
 //import org.springframework.context.annotation.Configuration;
 //import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -15,8 +15,8 @@
 //public class WebMvcConfig implements WebMvcConfigurer {
 //
 //    @Bean
-//    SecurityInterceptor securityInterceptor() {
-//        return new SecurityInterceptor();
+//    ValidateSignInterceptor securityInterceptor() {
+//        return new ValidateSignInterceptor();
 //    }
 //
 //
