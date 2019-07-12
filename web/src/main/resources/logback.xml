@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-
 <configuration scan="true" scanPeriod="3000 seconds" debug="false">
     <!--应用名 -->
-    <property name="APP_Name" value="springboot_study"/>
+    <property name="APP_NAME" value="springboot_study"/>
     <!--日志文件的保存路径-->
     <property name="LOG_HOME" value="F:/logs"/>
     <!--日志输出级别-->
@@ -11,7 +10,7 @@
     <property name="ENCODER_PATTERN"
               value="%d{yyyy-MM-dd  HH:mm:ss.SSS} [%thread] %-5level %logger{32} - %msg%n"/>
 
-    <contextName>${APP_Name}</contextName>
+    <!--<contextNAME>${APP_NAME}</contextNAME>-->
 
     <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener"/>
 
@@ -25,11 +24,12 @@
     <appender name="INFO-FILE"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy
-                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>
+                class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNAMEPattern>
                 ${LOG_HOME}/study_info.%d{yyyy-MM-dd}.log
-            </FileNamePattern>
+            </FileNAMEPattern>
             <MaxHistory>180</MaxHistory>
+            <MaxFileSize>10MB</MaxFileSize>
         </rollingPolicy>
 
         <layout class="ch.qos.logback.classic.PatternLayout">
@@ -45,11 +45,12 @@
     <appender name="WARN-FILE"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy
-                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>
+                class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNAMEPattern>
                 ${LOG_HOME}/study_warn.%d{yyyy-MM-dd}.log
-            </FileNamePattern>
+            </FileNAMEPattern>
             <MaxHistory>180</MaxHistory>
+            <MaxFileSize>10MB</MaxFileSize>
         </rollingPolicy>
 
         <layout class="ch.qos.logback.classic.PatternLayout">
@@ -65,11 +66,12 @@
     <appender name="ERROR-FILE"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy
-                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>
+                class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNAMEPattern>
                 ${LOG_HOME}/study_error.%d{yyyy-MM-dd}.log
-            </FileNamePattern>
+            </FileNAMEPattern>
             <MaxHistory>180</MaxHistory>
+            <MaxFileSize>10MB</MaxFileSize>
         </rollingPolicy>
 
         <layout class="ch.qos.logback.classic.PatternLayout">
