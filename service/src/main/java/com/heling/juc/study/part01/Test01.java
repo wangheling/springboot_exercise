@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.concurrent.*;
 
 /**
- * @Auther: wangheling
+ * @Author: wangheling
  * @Date: 2019/7/3 11:37
  * @Description: 使用wait、notify实现生产者消费者demo
  * tips:1.自定义线程工厂

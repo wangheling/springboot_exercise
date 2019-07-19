@@ -8,7 +8,7 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * @Auther: wangheling
+ * @Author: wangheling
  * @Date: 2019/7/3 14:22
  * @Description: 自定义线程工厂：设置线程名，守护线程，优先级以及UncaughtExceptionHandler
  */

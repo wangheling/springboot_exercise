@@ -7,7 +7,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 
 /**
- * @Auther: wangheling
+ * @Author: wangheling
  * @Date: 2019/7/19 13:52
  * @Description: 简易版非公平可重入锁
  * <p>

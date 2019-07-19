@@ -7,7 +7,7 @@ import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * @Auther: wangheling
+ * @Author: wangheling
  * @Date: 2019/7/10 13:18
  * @Description: 通过栅栏，计数器模拟高并发场景：比较Random、ThreadLocalRandom和ThreadLocal<Random>效率
  * <p>

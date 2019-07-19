@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import java.io.*;
 
 /**
- * @Auther: wangheling
+ * @Author: wangheling
  * @Date: 2019/7/8 15:05
  * @Description: 解决request只能获取一次getInputStream的问题
  * 参考：https://www.jianshu.com/p/69c6fba08c92

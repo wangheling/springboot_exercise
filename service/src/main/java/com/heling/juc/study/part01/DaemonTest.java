@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * @Auther: wangheling
+ * @Author: wangheling
  * @Date: 2019/7/4 17:28
  * @Description: 守护和非守护线程学习
  */

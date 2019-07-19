@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import java.util.*;
 
 /**
- * @Auther: wangheling
+ * @Author: wangheling
  * @Date: 2019/7/9 15:20
  * @Description: 验签
  */
