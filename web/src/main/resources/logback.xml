@@ -1,16 +1,15 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="3000 seconds" debug="false">
     <!--应用名 -->
-    <property name="APP_NAME" value="springboot_study"/>
+    <property name="APP_NAME" value="springboot-exercise"/>
     <!--日志文件的保存路径-->
-    <property name="LOG_HOME" value="F:/logs"/>
+    <property name="LOG_HOME" value="F:/logs/"/>
     <!--日志输出级别-->
     <property name="LOG_LEVEL" value="INFO"/>
     <!-- 日志输出格式 -->
     <property name="ENCODER_PATTERN"
               value="%d{yyyy-MM-dd  HH:mm:ss.SSS} [%thread] %-5level %logger{32} - %msg%n"/>
 
-    <!--<contextNAME>${APP_NAME}</contextNAME>-->
 
     <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener"/>
 
@@ -25,13 +24,11 @@
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy
                 class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <FileNAMEPattern>
-                ${LOG_HOME}/study_info.%d{yyyy-MM-dd}.log
-            </FileNAMEPattern>
-            <MaxHistory>180</MaxHistory>
+            <FileNamePattern>${LOG_HOME}${APP_NAME}/${APP_NAME}-info.%d{yyyy-MM-dd}.%i.log
+            </FileNamePattern>
+            <MaxHistory>60</MaxHistory>
             <MaxFileSize>10MB</MaxFileSize>
         </rollingPolicy>
-
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>${ENCODER_PATTERN}</pattern>
         </layout>
@@ -44,12 +41,10 @@
 
     <appender name="WARN-FILE"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <rollingPolicy
-                class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <FileNAMEPattern>
-                ${LOG_HOME}/study_warn.%d{yyyy-MM-dd}.log
-            </FileNAMEPattern>
-            <MaxHistory>180</MaxHistory>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_HOME}${APP_NAME}/${APP_NAME}-warn.%d{yyyy-MM-dd}.%i.log
+            </FileNamePattern>
+            <MaxHistory>60</MaxHistory>
             <MaxFileSize>10MB</MaxFileSize>
         </rollingPolicy>
 
@@ -65,15 +60,12 @@
 
     <appender name="ERROR-FILE"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <rollingPolicy
-                class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <FileNAMEPattern>
-                ${LOG_HOME}/study_error.%d{yyyy-MM-dd}.log
-            </FileNAMEPattern>
-            <MaxHistory>180</MaxHistory>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_HOME}${APP_NAME}/${APP_NAME}-error.%d{yyyy-MM-dd}.%i.log
+            </FileNamePattern>
+            <MaxHistory>60</MaxHistory>
             <MaxFileSize>10MB</MaxFileSize>
         </rollingPolicy>
-
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>${ENCODER_PATTERN}</pattern>
         </layout>
@@ -97,6 +89,9 @@
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="ERROR-FILE"/>
     </logger>
+
+    <logger name="com.ibatis"  level="DEBUG" />
+    <logger name="com.cuimitech" level="DEBUG" />
 
     <root>
         <level value="${LOG_LEVEL}"/>
