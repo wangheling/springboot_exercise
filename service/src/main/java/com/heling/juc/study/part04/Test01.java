@@ -17,25 +17,19 @@ public class Test01 {
 
     public static void main(String[] args) throws InterruptedException {
         //统计arr_one中0的个数
-        Thread thread01 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (int v : arr_one) {
-                    if (v == 0) {
-                        count.incrementAndGet();
-                    }
+        Thread thread01 = new Thread(() -> {
+            for (int v : arr_one) {
+                if (v == 0) {
+                    count.incrementAndGet();
                 }
             }
         });
 
         //统计arr_two中0的个数
-        Thread thread02 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (int v : arr_two) {
-                    if (v == 0) {
-                        count.incrementAndGet();
-                    }
+        Thread thread02 = new Thread(() -> {
+            for (int v : arr_two) {
+                if (v == 0) {
+                    count.incrementAndGet();
                 }
             }
         });

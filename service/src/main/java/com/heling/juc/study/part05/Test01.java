@@ -32,20 +32,17 @@ public class Test01 {
         CopyOnWriteArrayList<String> cowList = new CopyOnWriteArrayList<>();
 
         for (int i = 0; i < threads; i++) {
-            Thread thread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        barrier.await();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (BrokenBarrierException e) {
-                        e.printStackTrace();
-                    }
-//                    arrayList.add("test");
-                    cowList.add("test");
-                    latch.countDown();
+            Thread thread = new Thread(() -> {
+                try {
+                    barrier.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (BrokenBarrierException e) {
+                    e.printStackTrace();
                 }
+//                    arrayList.add("test");
+                cowList.add("test");
+                latch.countDown();
             });
             thread.start();
         }

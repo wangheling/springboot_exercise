@@ -26,12 +26,9 @@ public class Test02 {
         list.add(1);
         list.add(1);
         list.add(1);
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                list.set(0, 2);
-                list.remove(4);
-            }
+        Thread thread = new Thread(() -> {
+            list.set(0, 2);
+            list.remove(4);
         });
 
         Iterator<Integer> iterator = list.iterator();

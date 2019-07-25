@@ -13,47 +13,38 @@ public class Test02 {
 
     public static void main(String[] args) throws InterruptedException {
 
-        Thread threadA = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                synchronized (lock) {
-                    System.out.println("a获得了锁");
-                    System.out.println("a开始wait");
-                    try {
-                        lock.wait();
-                        System.out.println("a结束wait");
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+        Thread threadA = new Thread(() -> {
+            synchronized (lock) {
+                System.out.println("a获得了锁");
+                System.out.println("a开始wait");
+                try {
+                    lock.wait();
+                    System.out.println("a结束wait");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         }, "threadA");
 
-        Thread threadB = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                synchronized (lock) {
-                    System.out.println("b获得了锁");
-                    System.out.println("b开始wait");
-                    try {
-                        lock.wait();
-                        System.out.println("b结束wait");
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+        Thread threadB = new Thread(() -> {
+            synchronized (lock) {
+                System.out.println("b获得了锁");
+                System.out.println("b开始wait");
+                try {
+                    lock.wait();
+                    System.out.println("b结束wait");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         }, "threadB");
 
-        Thread threadC = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                synchronized (lock) {
-                    System.out.println("c获得了锁");
-                    System.out.println("c开始通知");
+        Thread threadC = new Thread(() -> {
+            synchronized (lock) {
+                System.out.println("c获得了锁");
+                System.out.println("c开始通知");
 //                    lock.notify();
-                    lock.notifyAll();
-                }
+                lock.notifyAll();
             }
         }, "threadC");
 

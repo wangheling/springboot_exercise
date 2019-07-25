@@ -64,12 +64,7 @@ public class Demo01 {
      * 2.parse进行同步，存在锁竞争，效率低下；
      * 3.ThreadLocal，下面是代码：
      */
-    static ThreadLocal<SimpleDateFormat> local = new ThreadLocal<SimpleDateFormat>(){
-        @Override
-        protected SimpleDateFormat initialValue() {
-            return new SimpleDateFormat("yyyy-MM-dd");
-        }
-    };
+    static ThreadLocal<SimpleDateFormat> local = ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyy-MM-dd"));
 
     public static void main(String[] args) {
 
