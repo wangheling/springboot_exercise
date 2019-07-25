@@ -35,4 +35,22 @@
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <env>dev</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>co</id>
+            <properties>
+                <env>co</env>
+            </properties>
+        </profile>
+    </profiles>
+
 </project>

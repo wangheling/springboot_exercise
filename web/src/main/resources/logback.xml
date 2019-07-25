@@ -3,7 +3,7 @@
     <!--应用名 -->
     <property name="APP_NAME" value="springboot-exercise"/>
     <!--日志文件的保存路径-->
-    <property name="LOG_HOME" value="F:/logs/"/>
+    <property name="LOG_HOME" value="D:/logs/"/>
     <!--日志输出级别-->
     <property name="LOG_LEVEL" value="INFO"/>
     <!-- 日志输出格式 -->

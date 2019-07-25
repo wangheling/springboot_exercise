@@ -1,0 +1,45 @@
+#mysql
+spring:
+  datasource:
+    url: jdbc:mysql://192.168.1.83:3306/cuimi_ai_dev?serverTimezone=Asia/Shanghai&useUnicode=true&amp&characterEncoding=utf-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: Tech@2018
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    # 下面为连接池的补充设置，应用到上面所有数据源中
+    # 初始化大小，最小，最大
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    # 配置获取连接等待超时的时间
+    maxWait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    # 打开PSCache，并且指定每个连接上PSCache的大小
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    filters: stat,wall,log4j
+    # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    # 合并多个DruidDataSource的监控数据
+    useGlobalDataSourceStat: true
+
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml
+
+
+key:
+  # 验签私钥（请求方用商户私钥加密签名，平台公钥验签）
+  publicKeyA: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCl+YxzB3pKjeHCmb4jWDtPDo+hwfhfQq8XyaDWNd+wGBNiELxv2bU18gmTxU+YQm3BAioJFvNuqZ6+nr7A0beYTQMNOIYHDfmRKGSAW0mYrponoh14JBZ6UDmpsrMaLAWAlx8F0kD0dvlu0DbDzC8AkJ81Qnk/qd88bKVFbmYDPQIDAQAB
+  # 解密公钥（请求方用商户公钥加密数据，平台私钥解密数据）
+  privateKeyB: MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAIa+6H4cygry7loNPhho6irnf4K5oGWLkAC9TXadeNKTkKq2tRJ3o3kTUgorbuNEGa1w9UrES/6aOGo+8HU36En5sJkgzX5GPiw+3uuiO7JLMMP/aybEoEyDi4lOw4Ek2dYmp2Ix0GKQCPXP/UnYlf3Mrv2nlh9P0YU8Uc060fa1AgMBAAECgYBlmb2kmgCekN64eBPCRBmNkFDNOTqAVuOWKyclsUdRQINstaeC7UMOIEtT77wFEWxrIylR3wGOUKsJMbwOJsG3LXM60IPx25doRgYkWJieMa5KRDMge37cjBWM58o8f6bdZ+HZWJzwIosIbJRZXW7ncUWpMvDQhnhXA51FBd9fYQJBAMKIARkNgQf6MmEjDP7AZtqSa3cLJXsfwYAKwIOYIb9J/DZVVTs/gfx8TiyNIkQxQtx7K6r25/6zxM7enJ04FwsCQQCxUr25l8a0ilP6lk8f1F0/u5W7kmsPPDOXx3D8yEySQzyKadVKf8HJPpmsfVgvL4hAVCze2stxEKsa1GoVD8E/AkA4Gmteo1NkTpc7BpXX3vuK7BGMSq2rndP7rp4pFbYd6iOQM/oZ1U4S2HLfTHDmg+KJnghRDVaJUaVgGDnI6gVTAkEAh5O3s/sz1j4dT281OCTq1xvZs/yTFqb024uF/AA5a2s1Eq8wgTGFPRU78gI0Nn+lMWoqlIm9GsmfyXe3VDsjiQJAcGNoFx2uq0SpfR2UnzuVoCApb0r2Dbx9EpUBjhz6iQnOjPYo4hScwuaR4VoigkT0k1YABCXzjB4Ak+DSZg7o4g==
+
+#  privateKeyA: MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAKX5jHMHekqN4cKZviNYO08Oj6HB+F9CrxfJoNY137AYE2IQvG/ZtTXyCZPFT5hCbcECKgkW826pnr6evsDRt5hNAw04hgcN+ZEoZIBbSZiumieiHXgkFnpQOamysxosBYCXHwXSQPR2+W7QNsPMLwCQnzVCeT+p3zxspUVuZgM9AgMBAAECgYA5dzy0uxsRYyyOdzLJBAyM48rBQ+qd+PWss8f3QvHvA3b6ljbYNzWxttqwCjnzytQ7ZmdtfD/OyfXHpCkBk9sP1RUEGPj0nW5yFq2KexWp5jwK2Cy52c9HL7Lm/uhdoC94lgvizlb6DWFHBQn1ZJimJo2kuuOp01dB6VtGE+z5QQJBAO72tSGG0hqj10j6zC3mAxqx4dPnuFWBxAaBtPWUcuREttc0yYHYRSz0p6+84Fkv/IR1VBgwjNSRAreRI5Wrsy0CQQCxzrslXpy07vPQ0XOMAnJHCy2l9epVhgXfGkVW7FosPxe8gKM/opF6YYLsbrbj6tLpfw41TVPQ7V3WMHH1NtpRAkEAwlsH0R/tjNtLQ0Ewhfg4+CJLkWU7KNilTcF7I+48T+qPZ5O4fRIgmULXi/ir4/5CfJ1M62u5bz4OHq0+awI+dQJBAIq7IC3SGjbZ0gZ1xc/SANQJlr5Ml1/PSDmAx+VAWEL5n02GmNkHwLZZ6ssKv0wpZhKk/bL8+I6lBXgfKGsJN2ECQGPQmZArt0iu3+S7v/nI64vdvCKIX0p03jzF92mHnlC+bhAkQntPhFapJPcWgEI9degsUzwTX9gOz1m77Hx3k64=
+#  publicKeyB: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCGvuh+HMoK8u5aDT4YaOoq53+CuaBli5AAvU12nXjSk5CqtrUSd6N5E1IKK27jRBmtcPVKxEv+mjhqPvB1N+hJ+bCZIM1+Rj4sPt7rojuySzDD/2smxKBMg4uJTsOBJNnWJqdiMdBikAj1z/1J2JX9zK79p5YfT9GFPFHNOtH2tQIDAQAB
