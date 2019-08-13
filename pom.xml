@@ -58,6 +58,18 @@
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
 
+        <!--zkClient curator-->
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-framework</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+
         <!--<dependency>-->
         <!--<groupId>org.apache.shardingsphere</groupId>-->
         <!--<artifactId>sharding-jdbc-spring-boot-starter</artifactId>-->
